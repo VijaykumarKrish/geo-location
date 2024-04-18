@@ -35,7 +35,7 @@ function showPosition(position) {
 }
 
  postData = async (data) =>{
-    const response = await fetch("http://localhost:3000/data",{
+    const response = await fetch("https://sse-ymct.onrender.com/data",{
     method:"POST",
     headers:{
         "content-Type":"application/json"
