@@ -3,15 +3,20 @@ var map;
 var marker;
 
 // document.getElementById('startTrackingButton').addEventListener('click', startTracking);
-let userAgent = navigator.userAgent;
+const socket = io('http://localhost:3000');
+let mapInitialized = false;
+
 function startTracking() {
     if ("geolocation" in navigator) {
         navigator.geolocation.watchPosition(showPosition);
+        if (!mapInitialized) {
         map = L.map('map').setView([0, 0], 1);
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             // attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
             maxZoom: 18
         }).addTo(map);
+        mapInitialized = true;
+    }
     } else {
         console.log("Geolocation is not supported by this browser.");
     }
@@ -46,7 +51,30 @@ console.log("response "+response)
 
 }
 
-setInterval(() => {
-    startTracking();
-}, 5000);
+  socket.on('connect', function() {
+        console.log('web socket Connected');
+
+        socket.emit('eventData', { test: 'test' });
+
+      });
+      socket.on('startLocationData', function(data) {
+        console.log('startLocationData ', data);
+        setInterval(() => {
+            startTracking();
+            // const message = 'nest webserver'; // Your message here
+            // socket.emit('locationTrack',{data:'nest webserver'});
+            // console.log('Interval message', );
+          }, 1000);
+      });
+      socket.on('exception', function(data) {
+        console.log('event', data);
+      });
+      socket.on('disconnect', function() {
+        console.log('Disconnected');
+      });
+
+
+      socket.on('locationChange', (data) => {
+        console.log('locationChange event', data);
+      })
 
