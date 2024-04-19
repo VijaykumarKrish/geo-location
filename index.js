@@ -3,7 +3,7 @@ var map;
 var marker;
 
 // document.getElementById('startTrackingButton').addEventListener('click', startTracking);
-const userAgent = navigator.userAgent;const userAgent = navigator.userAgent;
+const userAgent = navigator.userAgent;
 function startTracking() {
     if ("geolocation" in navigator) {
         navigator.geolocation.watchPosition(showPosition);
