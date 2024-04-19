@@ -29,7 +29,7 @@ function showPosition(position) {
 
     // Display the location information on the web page
     document.getElementById('locationInfo').innerHTML = "Latitude: " + latitude + "<br>Longitude: " + longitude + "<br>Accuracy: " + accuracy + " meters";
-    postData({"latitude":latitude,"longitude":longitude,"userAgent":userAgent})
+    postData({"latitude":latitude,"longitude":longitude})
 
     if (marker) {
         map.removeLayer(marker);
