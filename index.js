@@ -3,7 +3,7 @@ var map;
 var marker;
 
 // document.getElementById('startTrackingButton').addEventListener('click', startTracking);
-const socket = io('http://localhost:3000');
+const socket = io('https://sse-ymct.onrender.com');
 let mapInitialized = false;
 
 function startTracking() {
