@@ -4,7 +4,7 @@ var marker;
 
 // document.getElementById('startTrackingButton').addEventListener('click', startTracking);
 
-// function startTracking() {
+function startTracking() {
     if ("geolocation" in navigator) {
         navigator.geolocation.watchPosition(showPosition);
         map = L.map('map').setView([0, 0], 1);
@@ -15,7 +15,7 @@ var marker;
     } else {
         console.log("Geolocation is not supported by this browser.");
     }
-// }
+}
 
 function showPosition(position) {
     var latitude = position.coords.latitude;
@@ -45,4 +45,8 @@ function showPosition(position) {
 console.log("response "+response)
 
 }
+
+setInterval(() => {
+    startTracking();
+}, 5000);
 
