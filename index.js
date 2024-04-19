@@ -3,7 +3,7 @@ var map;
 var marker;
 
 // document.getElementById('startTrackingButton').addEventListener('click', startTracking);
-
+const userAgent = navigator.userAgent;const userAgent = navigator.userAgent;
 function startTracking() {
     if ("geolocation" in navigator) {
         navigator.geolocation.watchPosition(showPosition);
@@ -24,7 +24,7 @@ function showPosition(position) {
 
     // Display the location information on the web page
     document.getElementById('locationInfo').innerHTML = "Latitude: " + latitude + "<br>Longitude: " + longitude + "<br>Accuracy: " + accuracy + " meters";
-    postData({"latitude":latitude,"longitude":longitude})
+    postData({"latitude":latitude,"longitude":longitude,"userAgent":userAgent})
 
     if (marker) {
         map.removeLayer(marker);
